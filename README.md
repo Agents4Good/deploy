@@ -18,8 +18,12 @@ Esse repositório é dedicado à guardar todos os passos e arquivos necessários
 Iniciar do zero:
 ```bash
 cd EurecaChat/
+
 vim .env
+# Preencher .env
+
 docker build --build-arg GITUSER="" --build-arg GITPASSWORD="" --build-arg BRANCH="branch-requisitada" -t eureca_chat .
+
 docker run -it --name eureca_chat -p 5000:5000 --env-file .env eureca_chat
 ```
 
