@@ -25,12 +25,18 @@ WORKDIR /root
 RUN git config --global credential.helper 'store --file=/root/.git-credentials'
 
 RUN echo "https://$GITUSER:$GITPASSWORD@dev.sti.ufcg.edu.br" > /root/.git-credentials && \
-    git clone https://github.com/Agents4Good/${REPO_NAME}.git && \
-    cd ${REPO_NAME} && \
-    git checkout ${BRANCH} && \
+    git clone https://github.com/Agents4Good/${REPO_NAME}.git
+
+WORKDIR /root/${REPO_NAME}
+
+RUN git checkout ${BRANCH} && \
     python -m venv venv && \
     . venv/bin/activate && \
     pip install --upgrade pip && \
     pip install -r requirements.txt
 
-WORKDIR /root/${REPO_NAME}
+RUN touch .env
+
+COPY .env .env
+
+CMD ["./venv/bin/python", "-m", "flask_app.app"]
