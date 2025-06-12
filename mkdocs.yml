@@ -1,4 +1,4 @@
-site_name: 'Título da Aplicação'
+site_name: 'Deploy'
 
 nav:
   - Home: README.md
